@@ -66,6 +66,10 @@ export default class LeafletMap extends Visualization {
   showChart() {
     super.setConfig(config);
     this.transformation.setConfig(config);
+    if(!this.chartInstance) {
+	this.chartInstance = L.map(this.getChartElementId());
+    }
+    return this.chartInstance;
   };
 
   getChartElementId() {
@@ -96,7 +100,7 @@ export default class LeafletMap extends Visualization {
 
   drawMapChart(chartDataModel) {
 
-      const map = this.chartInstance;
+      const map = this.showChart();
 
       var minLat = 180;
       var maxLat = -180;
