@@ -2,6 +2,13 @@
 
 A geospatial visualization for Apache Zeppelin using [Leaflet](http://leafletjs.com/)
 
+# Screenshots #
+
+![Enable Package](https://cloud.githubusercontent.com/assets/28304007/25633533/6c508d9e-2f45-11e7-99a7-505d94c382ba.gif)
+
+![Settings](https://cloud.githubusercontent.com/assets/28304007/25633526/69752486-2f45-11e7-9963-358d5ff29165.gif)
+
+
 ## Compatibility ##
 
 Requires Zeppelin 0.8.0-SNAPSHOT+
