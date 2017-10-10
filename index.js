@@ -108,7 +108,7 @@ export default class LeafletMap extends Visualization {
       var maxLng = -90;
 
       // split coordinates into lat,lng,alt
-      const coordRegex = /^([-+]?[1-8]?\d(\.\d+)?|90(\.0+)?)\s*,\s*([-+]?(180(\.0+)?|(1[0-7]\d)|([1-9]?\d)(\.\d+)?))\s*(,\s*([-+]?\d+(\.\d+)?))?$/
+      const coordRegex = /^([-+]?[1-8]?\d(\.\d+)?|90(\.0+)?)\s*,\s*([-+]?(180(\.0+)?|(1[0-7]\d)(\.\d+)?|([1-9]?\d)(\.\d+)?))\s*(,\s*([-+]?\d+(\.\d+)?))?$/
       
       for (var i = 0; i < chartDataModel.rows.length; i++) {
 	const row = chartDataModel.rows[i];
