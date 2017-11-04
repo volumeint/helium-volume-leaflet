@@ -153,6 +153,7 @@ export default class LeafletMap extends Visualization {
     }).addTo(map);
     
     this.getChartElement().style.height = this.targetEl.height();
+    map.invalidateSize(true)
   };
 
   createMapDataModel(data) {
