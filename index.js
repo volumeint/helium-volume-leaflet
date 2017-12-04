@@ -152,7 +152,8 @@ export default class LeafletMap extends Visualization {
         attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
     }).addTo(map);
     
-    this.getChartElement().style.height = '300px';
+    this.getChartElement().style.height = this.targetEl.height();
+    map.invalidateSize(true)
   };
 
   createMapDataModel(data) {
