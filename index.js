@@ -52,7 +52,8 @@ export default class LeafletMap extends Visualization {
     const columnSpec = [
 		{ name: 'coordinates'},
 		{ name: 'tooltip'},
-		{ name: 'popup'}
+		{ name: 'popup'},
+                { name: 'gis_server'}
 	];
 
     this.transformation = new ColumnselectorTransformation(config, columnSpec);
@@ -109,12 +110,14 @@ export default class LeafletMap extends Visualization {
 
       // split coordinates into lat,lng,alt
       const coordRegex = /^([-+]?[1-8]?\d(\.\d+)?|90(\.0+)?)\s*,\s*([-+]?(180(\.0+)?|(1[0-7]\d)(\.\d+)?|([1-9]?\d)(\.\d+)?))\s*(,\s*([-+]?\d+(\.\d+)?))?$/
-      
+     
+      var gis_server = 'x';      
       for (var i = 0; i < chartDataModel.rows.length; i++) {
 	const row = chartDataModel.rows[i];
         const coord = row[0];
 	const tooltip = row[1];
 	const popup = row[2];
+        gis_server = row[3];
 
         const regexResults = coordRegex.exec(coord);
 
@@ -148,7 +151,7 @@ export default class LeafletMap extends Visualization {
     ];
 
     map.fitBounds(bounds);
-    L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+    L.tileLayer('http://{s}.'+gis_server+'/{z}/{x}/{y}.png', {
         attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
     }).addTo(map);
     
@@ -175,6 +178,7 @@ export default class LeafletMap extends Visualization {
         const coordIdx = getColumnIndex(config, 'coordinates')
 	const tooltipIdx = getColumnIndex(config, 'tooltip')
         const popupIdx = getColumnIndex(config, 'popup', true)
+        const gisIdx = getColumnIndex(config, 'gis_server', true)
 
 	const mapDataModel = {
 	    rows: []
@@ -185,10 +189,12 @@ export default class LeafletMap extends Visualization {
                 const coord = tableRow[coordIdx]
                 const tooltip = tableRow[tooltipIdx]
                 const popup = popupIdx < 0 ? null : tableRow[popupIdx]
+                const gis_server = gisIdx < 0 ? 'tile.osm.org' : tableRow[gisIdx]
 		const mapRow = [
 			coord,
 			tooltip,
-			popup
+			popup,
+                        gis_server
 		];
 		mapDataModel.rows.push(mapRow)
 	}
